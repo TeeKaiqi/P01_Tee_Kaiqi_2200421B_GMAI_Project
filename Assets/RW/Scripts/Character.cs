@@ -39,6 +39,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public StandingState standing;
         public DuckingState ducking;
         public JumpingState jumping;
+        public DrawWeaponState drawWeapon; //added states
+        public SheathWeaponState sheathWeapon;
+        public SwingWeaponState swingWeapon;
 
         #region Variables
 
@@ -227,6 +230,11 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
             jumping = new JumpingState(this, movementSM);
 
+            drawWeapon = new DrawWeaponState(this, movementSM);
+
+            sheathWeapon = new SheathWeaponState(this, movementSM);
+
+            swingWeapon = new SwingWeaponState(this, movementSM);
             movementSM.Initialize(standing);
         }
 

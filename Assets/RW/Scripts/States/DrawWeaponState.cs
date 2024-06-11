@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawWeaponState : MonoBehaviour
+namespace RayWenderlich.Unity.StatePatternInUnity
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DrawWeaponState : GroundedState
     {
-        
-    }
+        private bool belowCeiling;
+        private bool crouchHeld;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public DrawWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
+        {
+        }
+        public override void Enter()
+        {
+            Debug.Log("DrawWeaponState entered.");
+        }
     }
 }
