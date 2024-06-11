@@ -12,6 +12,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public SwingWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
         }
+
         public override void Enter()
         {
             Debug.Log("SwingWeaponState entered.");

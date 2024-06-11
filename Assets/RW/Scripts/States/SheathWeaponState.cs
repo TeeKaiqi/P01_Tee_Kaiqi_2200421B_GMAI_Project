@@ -14,7 +14,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
         public override void Enter()
         {
-            Debug.Log("DrawWeaponState entered.");
+            Debug.Log("SheathWeaponState entered.");
         }
     }
 }

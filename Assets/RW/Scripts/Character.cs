@@ -235,6 +235,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             sheathWeapon = new SheathWeaponState(this, movementSM);
 
             swingWeapon = new SwingWeaponState(this, movementSM);
+            
             movementSM.Initialize(standing);
         }
 
