@@ -42,7 +42,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
         }
 
-
         private void Jump()
         {
             character.transform.Translate(Vector3.up * (character.CollisionOverlapRadius + 0.1f));
