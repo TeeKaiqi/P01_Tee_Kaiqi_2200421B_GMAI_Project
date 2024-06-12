@@ -15,7 +15,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
         public void Start()
         {
-            drawingAnimationFinished = false; //set the variable to false
+            drawingAnimationFinished = false; //set the variable to false so it can be reused in future when this state is called again
         }
         public override void Enter()
         {

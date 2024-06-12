@@ -39,6 +39,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private bool crouch;
         private bool draw;
         private bool sheath;
+        private bool swing;
 
         public StandingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -53,6 +54,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             jump = false;
             draw = false;
             sheath = false;
+            swing = false;
         }
 
         public override void HandleInput()
@@ -62,6 +64,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             jump = Input.GetButtonDown("Jump");
             draw = Input.GetKey(KeyCode.F);
             sheath = Input.GetKeyDown(KeyCode.G);
+            swing = Input.GetMouseButtonDown(0);
         }
 
         public override void LogicUpdate()
@@ -79,9 +82,13 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             {
                 stateMachine.ChangeState(character.drawWeapon); //change the state
             }
-            else if (character.isWeaponOut && sheath)
+            else if (character.isWeaponOut && sheath) //check that the weapon is out and the player pressed g before changing state
             {
                 stateMachine.ChangeState(character.sheathWeapon);
+            }
+            else if (character.isWeaponOut && swing) //check that the weapon is out and that the player pressed left mouse button
+            {
+                stateMachine.ChangeState(character.swingWeapon);
             }
         }
 
