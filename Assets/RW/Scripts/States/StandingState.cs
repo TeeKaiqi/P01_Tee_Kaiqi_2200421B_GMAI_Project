@@ -29,6 +29,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
@@ -36,6 +37,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     {
         private bool jump;
         private bool crouch;
+        private bool draw;
 
         public StandingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -48,6 +50,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             rotationSpeed = character.RotationSpeed;
             crouch = false;
             jump = false;
+            draw = false;
         }
 
         public override void HandleInput()
@@ -55,6 +58,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.HandleInput();
             crouch = Input.GetButtonDown("Fire3");
             jump = Input.GetButtonDown("Jump");
+            draw = Input.GetKey(KeyCode.F);
         }
 
         public override void LogicUpdate()
@@ -67,6 +71,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else if (jump)
             {
                 stateMachine.ChangeState(character.jumping);
+            }
+            else if (draw)
+            {
+                stateMachine.ChangeState(character.drawWeapon);
             }
         }
 
