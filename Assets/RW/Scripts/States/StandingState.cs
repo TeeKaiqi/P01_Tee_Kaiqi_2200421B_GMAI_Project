@@ -72,9 +72,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             {
                 stateMachine.ChangeState(character.jumping);
             }
-            else if (draw)
+            else if (!character.isWeaponOut && draw) //checks to make sure that the character doesn't already have a weapon out and that the user pressed f
             {
-                stateMachine.ChangeState(character.drawWeapon);
+                stateMachine.ChangeState(character.drawWeapon); //change the state
             }
         }
 

@@ -29,8 +29,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.LogicUpdate();
             Debug.Log("Logic update");
-            if (drawingAnimationFinished )
+            if (drawingAnimationFinished)
             {
+                character.isWeaponOut = true;
                 stateMachine.ChangeState(character.standing);
             }
 

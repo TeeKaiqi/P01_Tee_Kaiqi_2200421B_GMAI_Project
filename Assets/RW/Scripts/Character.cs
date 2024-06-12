@@ -77,6 +77,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private int verticalMoveParam = Animator.StringToHash("V_Speed");
         private int shootParam = Animator.StringToHash("Shoot");
         private int hardLanding = Animator.StringToHash("HardLand");
+
+        public bool isWeaponOut; //my added boolean that will keep track of if the character already has a weapon in hand
         #endregion
 
         #region Properties
@@ -238,6 +240,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             swingWeapon = new SwingWeaponState(this, movementSM);
             
             movementSM.Initialize(standing);
+
+            isWeaponOut = false;
         }
 
         private void Update()
