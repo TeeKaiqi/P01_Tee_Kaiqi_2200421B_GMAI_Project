@@ -41,6 +41,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private bool sheath;
         private bool swing;
         private bool slide;
+        private bool dead;
 
         public StandingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -57,6 +58,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             sheath = false;
             swing = false;
             slide = false;
+            dead = false;
         }
 
         public override void HandleInput()
@@ -68,6 +70,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             sheath = Input.GetKeyDown(KeyCode.G);
             swing = Input.GetMouseButtonDown(0);
             slide = Input.GetKeyDown(KeyCode.LeftControl);
+            dead = Input.GetKeyDown(KeyCode.P);
         }
 
         public override void LogicUpdate()
@@ -96,6 +99,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else if (character.isWeaponOut && swing) //check that the weapon is out and that the player pressed left mouse button
             {
                 stateMachine.ChangeState(character.swingWeapon);
+            }
+            else if (dead)
+            {
+                stateMachine.ChangeState(character.death);
             }
         }
 

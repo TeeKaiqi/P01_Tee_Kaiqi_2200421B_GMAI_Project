@@ -40,6 +40,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public DuckingState ducking;
         public JumpingState jumping;
         public SlidingState sliding; //added states
+        public DeathState death;
+        public BlockingState block;
         public DrawWeaponState drawWeapon;
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
@@ -235,6 +237,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             jumping = new JumpingState(this, movementSM);
 
             sliding = new SlidingState(this, movementSM);
+
+            death = new DeathState(this, movementSM);
+
+            block = new BlockingState(this, movementSM);
 
             drawWeapon = new DrawWeaponState(this, movementSM);
 
