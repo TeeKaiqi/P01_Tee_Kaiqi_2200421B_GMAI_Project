@@ -96,6 +96,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public float DiveThreshold => diveThreshold;
         public float MeleeRestThreshold => meleeRestThreshold;
         public int isMelee => Animator.StringToHash("IsMelee");
+        public int drawMelee => Animator.StringToHash("DrawMelee");
         public int crouchParam => Animator.StringToHash("Crouch");
 
         public float ColliderSize
