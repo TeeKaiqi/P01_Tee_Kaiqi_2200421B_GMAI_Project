@@ -18,7 +18,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("DrawWeaponState entered.");
+            //Debug.Log("DrawWeaponState entered.");
             character.SetAnimationBool(character.isMelee, true); //"call" the animator and pass in the isMelee parameter
             character.SetAnimationBool(character.drawMelee, true); //"call" the animator by passing in the parameter name (this is the drawmelee animation)
             character.Equip(character.MeleeWeapon); //call the equip function from the character script
@@ -28,7 +28,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            Debug.Log("Logic update");
+            //Debug.Log("Logic update");
             if (drawingAnimationFinished)
             {
                 character.isWeaponOut = true;
@@ -39,7 +39,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("DrawWeaponState exiting.");
+            //Debug.Log("DrawWeaponState exiting.");
             character.SetAnimationBool(character.drawMelee, false); //set the bool to false
 
         }

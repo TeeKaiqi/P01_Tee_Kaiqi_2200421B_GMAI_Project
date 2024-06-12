@@ -38,6 +38,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private bool jump;
         private bool crouch;
         private bool draw;
+        private bool sheath;
 
         public StandingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -51,6 +52,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             crouch = false;
             jump = false;
             draw = false;
+            sheath = false;
         }
 
         public override void HandleInput()
@@ -59,6 +61,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             crouch = Input.GetButtonDown("Fire3");
             jump = Input.GetButtonDown("Jump");
             draw = Input.GetKey(KeyCode.F);
+            sheath = Input.GetKeyDown(KeyCode.G);
         }
 
         public override void LogicUpdate()
@@ -75,6 +78,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else if (!character.isWeaponOut && draw) //checks to make sure that the character doesn't already have a weapon out and that the user pressed f
             {
                 stateMachine.ChangeState(character.drawWeapon); //change the state
+            }
+            else if (character.isWeaponOut && sheath)
+            {
+                stateMachine.ChangeState(character.sheathWeapon);
             }
         }
 
