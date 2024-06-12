@@ -40,6 +40,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private bool draw;
         private bool sheath;
         private bool swing;
+        private bool slide;
 
         public StandingState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -55,6 +56,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             draw = false;
             sheath = false;
             swing = false;
+            slide = false;
         }
 
         public override void HandleInput()
@@ -65,6 +67,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             draw = Input.GetKey(KeyCode.F);
             sheath = Input.GetKeyDown(KeyCode.G);
             swing = Input.GetMouseButtonDown(0);
+            slide = Input.GetKeyDown(KeyCode.LeftControl);
         }
 
         public override void LogicUpdate()
@@ -77,6 +80,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else if (jump)
             {
                 stateMachine.ChangeState(character.jumping);
+            }
+            else if (slide)
+            {
+                stateMachine.ChangeState(character.sliding);
             }
             else if (!character.isWeaponOut && draw) //checks to make sure that the character doesn't already have a weapon out and that the user pressed f
             {

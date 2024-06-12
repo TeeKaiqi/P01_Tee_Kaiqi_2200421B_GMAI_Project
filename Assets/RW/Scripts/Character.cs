@@ -39,7 +39,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public StandingState standing;
         public DuckingState ducking;
         public JumpingState jumping;
-        public DrawWeaponState drawWeapon; //added states
+        public SlidingState sliding; //added states
+        public DrawWeaponState drawWeapon;
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
 
@@ -232,6 +233,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             ducking = new DuckingState(this, movementSM);
 
             jumping = new JumpingState(this, movementSM);
+
+            sliding = new SlidingState(this, movementSM);
 
             drawWeapon = new DrawWeaponState(this, movementSM);
 
