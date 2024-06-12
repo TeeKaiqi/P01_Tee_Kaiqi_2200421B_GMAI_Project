@@ -95,9 +95,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public float CollisionOverlapRadius => collisionOverlapRadius;
         public float DiveThreshold => diveThreshold;
         public float MeleeRestThreshold => meleeRestThreshold;
-        public int isMelee => Animator.StringToHash("IsMelee");
-        public int drawMelee => Animator.StringToHash("DrawMelee");
+        public int isMelee => Animator.StringToHash("IsMelee"); 
         public int crouchParam => Animator.StringToHash("Crouch");
+        public int drawMelee => Animator.StringToHash("DrawMelee"); //access the drawMelee parameter from the animator so that I can play the animation from DrawWeaponState
 
         public float ColliderSize
         {
