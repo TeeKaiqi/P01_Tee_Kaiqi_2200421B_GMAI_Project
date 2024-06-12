@@ -6,14 +6,14 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class DrawWeaponState : GroundedState
     {
-        private bool drawingAnimationFinished;
+        private bool drawingAnimationFinished; //boolean that keeps track of it the animation progress
         public DrawWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
         }
 
         public void Start()
         {
-            drawingAnimationFinished = false;
+            drawingAnimationFinished = false; //set the variable to false
         }
         public override void Enter()
         {
@@ -22,17 +22,17 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             character.SetAnimationBool(character.isMelee, true); //"call" the animator and pass in the isMelee parameter
             character.SetAnimationBool(character.drawMelee, true); //"call" the animator by passing in the parameter name (this is the drawmelee animation)
             character.Equip(character.MeleeWeapon); //call the equip function from the character script
-            drawingAnimationFinished = true;
+            drawingAnimationFinished = true; //set the variable to true, will be used to tell the script when to changestate/exit
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
             //Debug.Log("Logic update");
-            if (drawingAnimationFinished)
+            if (drawingAnimationFinished) //if the draw animation is done it is time to switch states
             {
-                character.isWeaponOut = true;
-                stateMachine.ChangeState(character.standing);
+                character.isWeaponOut = true; //change the boolean to true, this is to ensure the user can sheath the weapon if the weapon is out 
+                stateMachine.ChangeState(character.standing); //change the character state back to standing so that the user can walk like normal
             }
 
         }
@@ -40,7 +40,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Exit();
             //Debug.Log("DrawWeaponState exiting.");
-            character.SetAnimationBool(character.drawMelee, false); //set the bool to false
+            character.SetAnimationBool(character.drawMelee, false); //set the bool to false so that the drawmelee bool in the animator can be activated again in the future
 
         }
     }

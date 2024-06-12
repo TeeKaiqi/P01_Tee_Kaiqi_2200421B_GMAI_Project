@@ -6,7 +6,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class SheathWeaponState : GroundedState
     {
-        private bool sheathMeleeAnimationFinish;
+        private bool sheathMeleeAnimationFinish; //boolean that keeps track of the animation status, used for changing states
 
         public SheathWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
@@ -14,31 +14,33 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
         public void Start()
         {
-            sheathMeleeAnimationFinish = false;
+            sheathMeleeAnimationFinish = false; //set the variable to false in start
         }
 
         public override void Enter()
         {
-            Debug.Log("SheathWeaponState entered.");
-            character.SetAnimationBool(character.sheathMelee, true);
-            character.Unequip();
-            sheathMeleeAnimationFinish = true;
+            base.Enter();
+            //Debug.Log("SheathWeaponState entered.");
+            character.SetAnimationBool(character.sheathMelee, true); //set the animator sheathmelee bool to true so that the animation can play
+            character.Unequip(); //unequip the weapon by calling the function to destroy the weapon in character
+            sheathMeleeAnimationFinish = true; //set the animation bool to finish so that the logic update can change state
         }
 
         public override void LogicUpdate()
         {
-            Debug.Log("SheathWeaponState Logic Entered.");
             base.LogicUpdate();
-            if (sheathMeleeAnimationFinish)
+            //Debug.Log("SheathWeaponState Logic Entered.");
+            if (sheathMeleeAnimationFinish) //if the animation is done playing, following logic ensues
             {
-                character.isWeaponOut = false;
-                stateMachine.ChangeState(character.standing);
+                character.isWeaponOut = false; //set the boolean to false so that the character can draw their sword again after this
+                stateMachine.ChangeState(character.standing); //change the character state to standing
             }
         }
         public override void Exit()
         {
-            Debug.Log("SheathWeaponState Exit entered");
-            character.SetAnimationBool(character.sheathMelee, false);
+            base.Exit();
+            //Debug.Log("SheathWeaponState Exit entered");
+            character.SetAnimationBool(character.sheathMelee, false); //set the animator sheath boolean to false so that it can be activated again in the future
         }
     }
 }
