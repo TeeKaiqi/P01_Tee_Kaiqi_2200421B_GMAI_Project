@@ -7,7 +7,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class SheathWeaponState : GroundedState
     {
         private bool sheathMeleeAnimationFinish; //boolean that keeps track of the animation status, used for changing states
-
+        public int sheathMelee => Animator.StringToHash("SheathMelee"); //access to the sheathMelee parameter in the animator
         public SheathWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
         }
@@ -21,7 +21,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Enter();
             //Debug.Log("SheathWeaponState entered.");
-            character.SetAnimationBool(character.sheathMelee, true); //set the animator sheathmelee bool to true so that the animation can play
+            character.TriggerAnimation(sheathMelee); //set the animator sheathmelee bool to true so that the animation can play
             character.Unequip(); //unequip the weapon by calling the function to destroy the weapon in character
             sheathMeleeAnimationFinish = true; //set the animation bool to finish so that the logic update can change state
         }
@@ -40,7 +40,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Exit();
             //Debug.Log("SheathWeaponState Exit entered");
-            character.SetAnimationBool(character.sheathMelee, false); //set the animator sheath boolean to false so that it can be activated again in the future
         }
     }
 }

@@ -7,6 +7,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class DrawWeaponState : GroundedState
     {
         private bool drawingAnimationFinished; //boolean that keeps track of it the animation progress
+        public int drawMelee => Animator.StringToHash("DrawMelee"); //access the drawMelee parameter from the animator so that I can play the animation from DrawWeaponState
+
         public DrawWeaponState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
         }
@@ -20,7 +22,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.Enter();
             //Debug.Log("DrawWeaponState entered.");
             character.SetAnimationBool(character.isMelee, true); //"call" the animator and pass in the isMelee parameter
-            character.SetAnimationBool(character.drawMelee, true); //"call" the animator by passing in the parameter name (this is the drawmelee animation)
+            character.SetAnimationBool(drawMelee, true); //"call" the animator by passing in the parameter name (this is the drawmelee animation)
             character.Equip(character.MeleeWeapon); //call the equip function from the character script
             drawingAnimationFinished = true; //set the variable to true, will be used to tell the script when to changestate/exit
         }
@@ -40,8 +42,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Exit();
             //Debug.Log("DrawWeaponState exiting.");
-            character.SetAnimationBool(character.drawMelee, false); //set the bool to false so that the drawmelee bool in the animator can be activated again in the future
-
         }
     }
 }

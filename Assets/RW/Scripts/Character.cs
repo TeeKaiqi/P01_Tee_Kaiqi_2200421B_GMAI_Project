@@ -99,8 +99,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public float MeleeRestThreshold => meleeRestThreshold;
         public int isMelee => Animator.StringToHash("IsMelee"); 
         public int crouchParam => Animator.StringToHash("Crouch");
-        public int drawMelee => Animator.StringToHash("DrawMelee"); //access the drawMelee parameter from the animator so that I can play the animation from DrawWeaponState
-        public int sheathMelee => Animator.StringToHash("SheathMelee"); //access to the sheathMelee parameter in the animator
+        
 
         public float ColliderSize
         {
