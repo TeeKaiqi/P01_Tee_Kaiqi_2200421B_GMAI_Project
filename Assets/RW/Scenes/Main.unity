@@ -1767,6 +1767,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97480e12fdd0e154c89adcad5198bba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 3
+  enemyHealth: 2
+  anim: {fileID: 0}
+  patrolState: {fileID: 0}
+  scaredState: {fileID: 0}
+  attackingState: {fileID: 0}
+  deadState: {fileID: 0}
+  seekingState: {fileID: 0}
 --- !u!1 &629873126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3368,7 +3376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1092145729
 Transform:
   m_ObjectHideFlags: 0
