@@ -21,6 +21,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Enter();
             //Debug.Log("DrawWeaponState entered.");
+            character.Unequip();
             character.SetAnimationBool(character.isMelee, true); //"call" the animator and pass in the isMelee parameter
             character.SetAnimationBool(drawMelee, true); //"call" the animator by passing in the parameter name (this is the drawmelee animation)
             character.Equip(character.MeleeWeapon); //call the equip function from the character script

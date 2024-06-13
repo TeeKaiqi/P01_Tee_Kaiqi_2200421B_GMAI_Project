@@ -22,7 +22,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.Enter();
             //Debug.Log("SheathWeaponState entered.");
             character.TriggerAnimation(sheathMelee); //set the animator sheathmelee bool to true so that the animation can play
-            character.Unequip(); //unequip the weapon by calling the function to destroy the weapon in character
+            //character.Unequip(); //unequip the weapon by calling the function to destroy the weapon in character
+            character.SheathWeapon();
             sheathMeleeAnimationFinish = true; //set the animation bool to finish so that the logic update can change state
         }
 
