@@ -35,6 +35,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     [RequireComponent(typeof(CapsuleCollider))]
     public class Character : MonoBehaviour
     {
+        public int playerHealth = 3;
+
         public StateMachine movementSM;
         public StandingState standing;
         public DuckingState ducking;
@@ -45,6 +47,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public DrawWeaponState drawWeapon;
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
+
+        //public int playerHealth = 3;
 
         #region Variables
 
@@ -258,6 +262,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             movementSM.CurrentState.HandleInput();
 
             movementSM.CurrentState.LogicUpdate();
+            if (Input.GetKeyDown(KeyCode.L)) //temporary code to check if healing works
+            {
+                playerHealth -= 1;
+            }
         }
 
         private void FixedUpdate()

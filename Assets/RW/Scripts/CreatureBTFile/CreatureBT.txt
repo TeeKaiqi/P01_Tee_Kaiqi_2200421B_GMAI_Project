@@ -1,2 +1,16 @@
 tree("Root")
-	Succeed
+	repeat
+		fallback
+			tree("Heal")
+			tree("Follow")
+
+tree("Heal")
+	sequence
+		DistanceBetweenPlayer
+		CheckHealth
+		Heal
+
+
+tree("Follow")
+	sequence
+		MoveToPlayer
