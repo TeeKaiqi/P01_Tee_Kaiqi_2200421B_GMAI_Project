@@ -48,7 +48,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
 
-        //public int playerHealth = 3;
 
         #region Variables
 

@@ -21,6 +21,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         Animator animator;
         private int horizonalMoveParam = Animator.StringToHash("H_Speed");
         private int verticalMoveParam = Animator.StringToHash("V_Speed");
+
+        public int heal => Animator.StringToHash("Heal"); //access to the death parameter in the animator
         // Start is called before the first frame update
         void Start()
         {
@@ -82,6 +84,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         void Heal()
         {
             Debug.Log("Healing");
+            animator.SetTrigger(heal);
             character.playerHealth += 1;
             Task.current.Succeed();
         }
