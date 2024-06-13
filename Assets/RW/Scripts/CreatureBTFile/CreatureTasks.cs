@@ -51,6 +51,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             animator.SetFloat(horizonalMoveParam, localVelocity.x);
             animator.SetFloat(verticalMoveParam, localVelocity.z);
         }
+
         [Task]
         void DistanceBetweenPlayer()
         {
@@ -65,6 +66,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
                 Task.current.Fail();
             }
         }
+
         [Task]
         void CheckHealth()
         {
@@ -77,7 +79,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             {
                 Task.current.Fail();
             }
-            
         }
 
         [Task]

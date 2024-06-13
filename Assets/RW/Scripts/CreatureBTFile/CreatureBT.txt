@@ -11,5 +11,4 @@ tree("Heal")
 		Heal
 
 tree("Follow")
-	sequence
-		MoveToPlayer
+	MoveToPlayer
