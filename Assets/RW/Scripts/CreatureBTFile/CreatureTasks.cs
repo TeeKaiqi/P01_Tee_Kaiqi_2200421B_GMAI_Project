@@ -8,7 +8,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class CreatureTasks : MonoBehaviour
     {
-        public float speed = 5f;
+        public float speed = 3f;
 
         private Rigidbody rb;
         private UnityEngine.AI.NavMeshAgent navAgent;
@@ -17,6 +17,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
         Transform target;
         GameObject player;
+
+        Animator animator;
+        private int horizonalMoveParam = Animator.StringToHash("H_Speed");
+        private int verticalMoveParam = Animator.StringToHash("V_Speed");
         // Start is called before the first frame update
         void Start()
         {
@@ -26,9 +30,25 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             player = GameObject.FindGameObjectWithTag("Player");
             creature = GetComponent<CreatureController>();
             character = player.GetComponent<Character>();
-
+            animator = GetComponent<Animator>();
         }
 
+        private void Update()
+        {
+            UpdateAnimationParameters();
+        }
+
+        public void UpdateAnimationParameters() //method that accesses the animator parameters so that it can update the movement and make the blend tree work
+        {
+            Vector3 velocity = navAgent.velocity; //set the velocity as the velocity from the navagent
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity); //referenced from ChatGPT
+            //I'm using localVelocity instead of velocity because that way the movement parameters align with the object's orientation
+            //This way when the slime turns, the animation will point in the correct direction compared to if it used normal world space velocity
+
+            // Set the Animator parameters
+            animator.SetFloat(horizonalMoveParam, localVelocity.x);
+            animator.SetFloat(verticalMoveParam, localVelocity.z);
+        }
         [Task]
         void DistanceBetweenPlayer()
         {
