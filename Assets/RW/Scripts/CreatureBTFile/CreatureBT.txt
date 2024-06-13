@@ -10,7 +10,6 @@ tree("Heal")
 		CheckHealth
 		Heal
 
-
 tree("Follow")
 	sequence
 		MoveToPlayer

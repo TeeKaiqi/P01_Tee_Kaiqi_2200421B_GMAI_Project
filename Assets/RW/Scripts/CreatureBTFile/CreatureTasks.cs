@@ -34,7 +34,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             Debug.Log("Checking distance between player");
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < 2f)
+            if (distance < creature.healingDistance)
             {
                 Task.current.Succeed();
             }
