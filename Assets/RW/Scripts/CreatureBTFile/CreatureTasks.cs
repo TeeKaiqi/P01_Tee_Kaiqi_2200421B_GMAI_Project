@@ -131,7 +131,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void MoveToPlayer()
         {
-            navAgent.stoppingDistance = 3f;
+            navAgent.stoppingDistance = 4f;
 
             if (navAgent.destination != player.transform.position)
             {

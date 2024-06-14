@@ -1773,9 +1773,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97480e12fdd0e154c89adcad5198bba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   enemyHealth: 2
   player: {fileID: 1252697822}
+  creature: {fileID: 0}
   character: {fileID: 1252697824}
   creatureTasks: {fileID: 789215356}
   navAgent: {fileID: 608709486}
@@ -1790,7 +1790,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -334000983
   m_Radius: 0.75
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bf543434c4c18468005500fc6d704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  tauntActionDone: 0
 --- !u!114 &789215357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3413,7 +3413,7 @@ Transform:
   m_GameObject: {fileID: 1092145727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3897,7 +3897,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161090114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d51810c7a684d16459e06aa54504dd4f, type: 3}
   m_Name: 
@@ -5133,17 +5133,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 1090219386143568, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+      propertyPath: m_TagString
+      value: Creature
+      objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7228,9 +7232,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1161090117}
   - {fileID: 1092145729}
   - {fileID: 241515156}
-  - {fileID: 1161090117}
   - {fileID: 1252697823}
   - {fileID: 1440106146}
   - {fileID: 1369261488}
