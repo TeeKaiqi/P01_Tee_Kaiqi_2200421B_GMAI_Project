@@ -10,7 +10,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class Enemy : MonoBehaviour
     {
-        private float speed = .5f;
+        private float speed = 1f;
         public int enemyHealth = 2;
 
         public GameObject player;
