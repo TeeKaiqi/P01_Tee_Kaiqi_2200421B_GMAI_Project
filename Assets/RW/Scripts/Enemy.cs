@@ -40,6 +40,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
             movementSM = new StateMachine();
             patrolState = new PatrollingState(this, movementSM);
+            seekingState = new SeekingState(this, movementSM);
 
             movementSM.IntialiseEnemy(patrolState);
         }
