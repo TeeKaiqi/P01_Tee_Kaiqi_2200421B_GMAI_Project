@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
-    public class PatrollingState : MonoBehaviour
+    public class PatrollingState : EnemyState
     {
+        public PatrollingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
+        {
+        }
+
         // Start is called before the first frame update
         void Start()
         {

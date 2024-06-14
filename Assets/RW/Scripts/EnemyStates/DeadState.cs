@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadState : MonoBehaviour
+namespace RayWenderlich.Unity.StatePatternInUnity
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DeadState : EnemyState
     {
-        
-    }
+        public DeadState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
+        {
+        }
+        // Start is called before the first frame update
+        void Start()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
     }
 }
