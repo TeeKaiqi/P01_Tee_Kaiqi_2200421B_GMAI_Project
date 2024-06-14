@@ -9,6 +9,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class PatrollingState : EnemyState
     {
         public NavMeshAgent navAgent;
+        GameObject creature;
+        CreatureTasks creatureTasks;
         public float range = 50f; //set range of the sphere that the enemy can patrol around
         public float rangeToDetectPlayer = 10f; //range where the enemy will be able to detect the player
         public PatrollingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
@@ -57,6 +59,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.Enter();
             Debug.Log("Enemy has entered its Patrol state");
             navAgent = enemy.navAgent;
+            creature = enemy.creature;
+            creatureTasks = creature.GetComponent<CreatureTasks>();
             SetRandomDestination(); //call the function in the beginning so the enemy starts moving almost immediately
         }
 
@@ -68,6 +72,11 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             if (PlayerWithinDetectRange() && enemy.character.CurrentState is not DuckingState) //if the bool is true
             {
                 stateMachine.ChangeEnemyState(enemy.seekingState); //change state
+            }
+
+            if (creatureTasks.tauntActionDone) //if the creature has taunted the enemy, it will switch to its scared state
+            {
+                stateMachine.ChangeEnemyState(enemy.scaredState);
             }
 
             if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance) 

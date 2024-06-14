@@ -6,18 +6,20 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class ScaredState : EnemyState
     {
+        Animator animator;
+        public int scared => Animator.StringToHash("Scared");
         public ScaredState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
         {
         }
-        // Start is called before the first frame update
-        void Start()
+        public override void Enter()
         {
+            base.Enter();
+            Debug.Log("Enemy scared");
 
-        }
+            animator = enemy.anim;
+            animator.SetTrigger(scared);
 
-        // Update is called once per frame
-        void Update()
-        {
+
 
         }
     }

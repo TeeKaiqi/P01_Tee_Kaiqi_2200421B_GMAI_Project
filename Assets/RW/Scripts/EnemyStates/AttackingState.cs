@@ -16,6 +16,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("AttackState entered");
             navAgent = enemy.navAgent;
         }
 

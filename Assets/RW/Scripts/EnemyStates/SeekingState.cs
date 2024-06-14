@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
+using static UnityEngine.GraphicsBuffer;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
@@ -33,7 +34,19 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             }
             else return false;
         }
+        void MoveToCharacter()
+        {
+            navAgent.stoppingDistance = 4f;
 
+            if (navAgent.destination != enemy.player.transform.position)
+            {
+                navAgent.SetDestination(enemy.player.transform.position);
+            }
+            if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
+            {
+                stateMachine.ChangeEnemyState(enemy.attackingState);
+            }
+        }
         public override void Enter()
         {
             base.Enter();
@@ -45,6 +58,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
             if (enemy.character.CurrentState is DuckingState) //if the character's currently in ducking state, the enemy cannot detect the player
             {
                 Debug.Log("The character is ducking and cannot be detected");
@@ -54,6 +68,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             {
                 stateMachine.ChangeEnemyState(enemy.scaredState);
             }
+            else MoveToCharacter();
         }
         public override void Exit()
         {

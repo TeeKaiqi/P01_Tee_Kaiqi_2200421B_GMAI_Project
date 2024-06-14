@@ -45,6 +45,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             patrolState = new PatrollingState(this, movementSM);
             seekingState = new SeekingState(this, movementSM);
             scaredState = new ScaredState(this, movementSM);
+            attackingState = new AttackingState(this, movementSM);
 
             movementSM.IntialiseEnemy(patrolState);
         }
