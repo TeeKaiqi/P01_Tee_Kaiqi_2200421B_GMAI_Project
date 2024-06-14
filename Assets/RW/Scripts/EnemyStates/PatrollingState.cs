@@ -56,7 +56,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.Enter();
             Debug.Log("Enemy has entered its Patrol state");
-            navAgent = enemy.GetComponent<NavMeshAgent>();
+            navAgent = enemy.navAgent;
             SetRandomDestination(); //call the function in the beginning so the enemy starts moving almost immediately
         }
 
@@ -65,7 +65,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.LogicUpdate();
             navAgent.stoppingDistance = 2f;
 
-            if (PlayerWithinDetectRange()) //if the bool is true
+            if (PlayerWithinDetectRange() && enemy.character.CurrentState is not DuckingState) //if the bool is true
             {
                 stateMachine.ChangeEnemyState(enemy.seekingState); //change state
             }

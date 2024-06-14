@@ -7,13 +7,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class SeekingState : EnemyState
     {
+        Transform target;
         public SeekingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
         {
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-
         }
 
         public override void Enter()
