@@ -11,7 +11,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public float speed = 3f;
 
         private Rigidbody rb;
-        private UnityEngine.AI.NavMeshAgent navAgent;
+        private NavMeshAgent navAgent;
         private CreatureController creature;
         private Character character;
 

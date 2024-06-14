@@ -33,6 +33,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class StateMachine
     {
         public State CurrentState { get; private set; }
+        public EnemyState CurrentEnemyState { get; private set; }
         public void Initialize(State startingState)
         {
             CurrentState = startingState;
@@ -47,5 +48,18 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             newState.Enter();
         }
 
+        public void IntialiseEnemy(EnemyState startingState) 
+        {
+            CurrentEnemyState = startingState;
+            startingState.Enter();
+        }
+
+        public void ChangeEnemyState(EnemyState newState)
+        {
+            CurrentEnemyState.Exit();
+
+            CurrentEnemyState = newState;
+            newState.Enter();
+        }
     }
 }

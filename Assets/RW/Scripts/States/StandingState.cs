@@ -74,7 +74,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             slide = Input.GetKeyDown(KeyCode.LeftControl);
             block = Input.GetKeyDown(KeyCode.E);
             dead = Input.GetKeyDown(KeyCode.P);
-            
         }
 
         public override void LogicUpdate()

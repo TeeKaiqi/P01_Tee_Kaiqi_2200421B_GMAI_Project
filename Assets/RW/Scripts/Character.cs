@@ -48,9 +48,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
 
+        public State CurrentState => movementSM.CurrentState; //include a public property that shows the current state of the character
 
         #region Variables
-
 
 #pragma warning disable 0649
         [SerializeField]

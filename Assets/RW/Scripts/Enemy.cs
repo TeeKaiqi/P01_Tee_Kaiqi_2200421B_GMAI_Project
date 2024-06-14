@@ -13,12 +13,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public float speed = 3f;
         public int enemyHealth = 2;
 
-        GameObject player;
-        private Character character;
-        private CreatureTasks creatureTasks;
-        private Rigidbody rb;
-        private UnityEngine.AI.NavMeshAgent navAgent;
-        
+        public GameObject player;
+        public Character character;
+        public CreatureTasks creatureTasks;
+        public NavMeshAgent navAgent;
         
         private int horizonalMoveParam = Animator.StringToHash("H_Speed");
         private int verticalMoveParam = Animator.StringToHash("V_Speed");
@@ -34,19 +32,23 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         // Start is called before the first frame update
         void Start()
         {
-            rb = GetComponent<Rigidbody>();
             navAgent = GetComponent<NavMeshAgent>();
             player = GameObject.FindGameObjectWithTag("Player");
-            player = GameObject.FindGameObjectWithTag("Player");
-            creatureTasks = GetComponent<CreatureTasks>();
             character = player.GetComponent<Character>();
+            creatureTasks = GetComponent<CreatureTasks>();
             anim = GetComponent<Animator>();
+
+            movementSM = new StateMachine();
+            patrolState = new PatrollingState(this, movementSM);
+
+            movementSM.IntialiseEnemy(patrolState);
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            movementSM.CurrentEnemyState.HandleInput();
+            movementSM.CurrentEnemyState.LogicUpdate();
         }
     }
 }
