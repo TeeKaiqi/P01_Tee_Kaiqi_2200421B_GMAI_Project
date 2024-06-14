@@ -14,6 +14,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public int enemyHealth = 2;
 
         public GameObject player;
+        public GameObject creature;
         public Character character;
         public CreatureTasks creatureTasks;
         public NavMeshAgent navAgent;
@@ -35,13 +36,15 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             navAgent = GetComponent<NavMeshAgent>();
             navAgent.speed = speed;
             player = GameObject.FindGameObjectWithTag("Player");
+            creature = GameObject.FindGameObjectWithTag("Creature");
             character = player.GetComponent<Character>();
-            creatureTasks = GetComponent<CreatureTasks>();
+            creatureTasks = creature.GetComponent<CreatureTasks>();
             anim = GetComponent<Animator>();
 
             movementSM = new StateMachine();
             patrolState = new PatrollingState(this, movementSM);
             seekingState = new SeekingState(this, movementSM);
+            scaredState = new ScaredState(this, movementSM);
 
             movementSM.IntialiseEnemy(patrolState);
         }

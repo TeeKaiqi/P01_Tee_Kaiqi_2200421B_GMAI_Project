@@ -8,31 +8,40 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class CreatureTasks : MonoBehaviour
     {
-        public float speed = 3f;
-
         private Rigidbody rb;
         private NavMeshAgent navAgent;
         private CreatureController creature;
         private Character character;
+        private Enemy enemyScript;
 
         Transform target;
         GameObject player;
+        GameObject enemyCharacter;
 
         Animator animator;
         private int horizonalMoveParam = Animator.StringToHash("H_Speed");
         private int verticalMoveParam = Animator.StringToHash("V_Speed");
 
-        public int heal => Animator.StringToHash("Heal"); //access to the death parameter in the animator
+        public int heal => Animator.StringToHash("Heal"); //access to the parameter in the animator
+        public int taunt => Animator.StringToHash("Taunt");
+
+        public bool tauntActionDone;
+
         // Start is called before the first frame update
         void Start()
         {
-            rb = GetComponent<Rigidbody>();
-            navAgent = GetComponent<NavMeshAgent>();
-            player = GameObject.FindGameObjectWithTag("Player");
-            player = GameObject.FindGameObjectWithTag("Player");
-            creature = GetComponent<CreatureController>();
-            character = player.GetComponent<Character>();
             animator = GetComponent<Animator>();
+            navAgent = GetComponent<NavMeshAgent>();
+            creature = GetComponent<CreatureController>();
+            navAgent.speed = creature.speed;
+
+            rb = GetComponent<Rigidbody>(); 
+            player = GameObject.FindGameObjectWithTag("Player");
+            enemyCharacter = GameObject.FindGameObjectWithTag("Enemy");
+            character = player.GetComponent<Character>();
+            enemyScript = enemyCharacter.GetComponent<Enemy>();
+
+            tauntActionDone = false;
         }
 
         private void Update()
@@ -55,7 +64,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void DistanceBetweenPlayer()
         {
-            Debug.Log("Checking distance between player");
+            //Debug.Log("Checking distance between player");
             float distance = Vector3.Distance(transform.position, player.transform.position);
             if (distance < creature.healingDistance)
             {
@@ -70,7 +79,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void CheckHealth()
         {
-            Debug.Log("Character's health is " + character.playerHealth);
+            //Debug.Log("Character's health is " + character.playerHealth);
             if (character.playerHealth < 3)
             {
                 Task.current.Succeed();
@@ -84,22 +93,50 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void Heal()
         {
-            Debug.Log("Healing");
+            //Debug.Log("Healing");
             animator.SetTrigger(heal);
             character.playerHealth += 1;
             Task.current.Succeed();
         }
 
         [Task]
+        void EnemyIsClose()
+        {
+            float distance = Vector3.Distance(transform.position, enemyCharacter.transform.position);
+            if (distance < creature.tauntingDistance)
+            {
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }
+
+        [Task]
+        bool AlreadyTaunted()
+        {
+            return (!tauntActionDone);
+        }
+
+        [Task]
+        void Taunt()
+        {
+            Debug.Log("Taunting");
+            tauntActionDone = true; //set the actiondone to true so that the enemy can know to change to scaredstate
+            animator.SetTrigger(taunt);
+            Task.current.Succeed();
+        }
+
+        [Task]
         void MoveToPlayer()
         {
-            navAgent.stoppingDistance = 2f;
+            navAgent.stoppingDistance = 3f;
 
             if (navAgent.destination != player.transform.position)
             {
                 navAgent.SetDestination(player.transform.position);
             }
-
             if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
             {
                 Task.current.Succeed();

@@ -2,6 +2,7 @@ tree("Root")
 	repeat
 		fallback
 			tree("Heal")
+			tree("Taunt")
 			tree("Follow")
 
 tree("Heal")
@@ -9,6 +10,13 @@ tree("Heal")
 		DistanceBetweenPlayer
 		CheckHealth
 		Heal
+
+tree("Taunt")
+	sequence
+		EnemyIsClose
+		AlreadyTaunted
+		Taunt
+		Wait(2.0)
 
 tree("Follow")
 	MoveToPlayer
