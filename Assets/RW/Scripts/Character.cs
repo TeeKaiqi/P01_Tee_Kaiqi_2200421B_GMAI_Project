@@ -29,6 +29,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
@@ -47,6 +48,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public DrawWeaponState drawWeapon;
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
+        public Text displayHealth;
 
         public State CurrentState => movementSM.CurrentState; //include a public property that shows the current state of the character
 
@@ -270,6 +272,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         private void FixedUpdate()
         {
             movementSM.CurrentState.PhysicsUpdate();
+            displayHealth.text = "Player health: " + playerHealth.ToString();
         }
 
         #endregion

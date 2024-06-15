@@ -120,6 +120,18 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
+        void EnemyState()
+        {
+            if (enemyScript.movementSM.CurrentEnemyState is PatrollingState || enemyScript.movementSM.CurrentEnemyState is SeekingState)
+            {
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }
+        [Task]
         void Taunt()
         {
             Debug.Log("Taunting");
