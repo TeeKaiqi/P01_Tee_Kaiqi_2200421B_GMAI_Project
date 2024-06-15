@@ -15,6 +15,7 @@ tree("Heal")
 tree("Victory")
 	sequence
 		CheckIfDead
+		YetToCelebrate
 		Celebrate 
 
 tree("Taunt")

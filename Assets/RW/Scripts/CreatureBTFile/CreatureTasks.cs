@@ -37,13 +37,13 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             creature = GetComponent<CreatureController>();
             navAgent.speed = creature.speed;
 
-            rb = GetComponent<Rigidbody>(); 
+            rb = GetComponent<Rigidbody>();
             player = GameObject.FindGameObjectWithTag("Player");
             enemyCharacter = GameObject.FindGameObjectWithTag("Enemy");
             character = player.GetComponent<Character>();
             enemyScript = enemyCharacter.GetComponent<Enemy>();
 
-            tauntActionDone = false; 
+            tauntActionDone = false;
             celebratedAlready = false;
         }
 
@@ -116,6 +116,20 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
+        void YetToCelebrate()
+        {
+            if (!celebratedAlready)
+            {
+                celebratedAlready = true;
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }
+
+        [Task]
         void Celebrate()
         {
             if (!celebratedAlready)
@@ -174,7 +188,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void MoveToPlayer()
         {
-            navAgent.stoppingDistance = 4f;
+            navAgent.stoppingDistance = 3f;
 
             if (navAgent.destination != player.transform.position)
             {

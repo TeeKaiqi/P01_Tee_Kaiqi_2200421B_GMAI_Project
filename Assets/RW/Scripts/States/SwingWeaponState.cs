@@ -27,7 +27,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             foreach (Collider collider in hitColliders)
             {
                 Enemy enemy = collider.GetComponent<Enemy>();
-                if (enemy != null)
+                if (enemy != null && enemy.enemyHealth > 0)
                 {
                     enemy.TakeDamage();
                 }
