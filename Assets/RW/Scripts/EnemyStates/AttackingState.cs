@@ -25,13 +25,13 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             foreach (Collider collider in hitColliders)
             {
                 Character character = collider.GetComponent<Character>();
-                if (character != null)
+                if (character != null && character.CurrentState is not BlockingState)
                 {
                     character.TakeDamage();
                 }
                 else
                 {
-                    Debug.Log("no character collider found");
+                    Debug.Log("no character collider found or character blocked");
                 }
             }
             attackAnimationDone = true;

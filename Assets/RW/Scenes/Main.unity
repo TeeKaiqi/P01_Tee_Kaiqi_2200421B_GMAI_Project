@@ -4480,7 +4480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 3
   displayHealth: {fileID: 1848366287}
-  enemy: {fileID: 0}
+  enemy: {fileID: 608709479}
   handTransform: {fileID: 18699401}
   sheathTransform: {fileID: 629873127}
   shootTransform: {fileID: 1995816450}

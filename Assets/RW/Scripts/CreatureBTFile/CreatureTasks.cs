@@ -83,7 +83,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         void CheckHealth()
         {
             //Debug.Log("Character's health is " + character.playerHealth);
-            if (character.playerHealth < 3 && character.playerHealth < 0)
+            if (character.playerHealth < 3 && character.playerHealth > 0)
             {
                 Task.current.Succeed();
             }
