@@ -229,6 +229,12 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             currentWeapon.transform.localPosition = Vector3.zero;
             currentWeapon.transform.localRotation = Quaternion.identity;
         }
+
+        public void TakeDamage()
+        {
+            playerHealth -= 1;
+        }
+
         #endregion
 
         #region MonoBehaviour Callbacks
@@ -266,9 +272,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             movementSM.CurrentState.HandleInput();
 
             movementSM.CurrentState.LogicUpdate();
-            if (Input.GetKeyDown(KeyCode.L)) //temporary code to check if healing works
+            if (playerHealth <=0) //temporary code to check if healing works
             {
-                playerHealth -= 1;
+                movementSM.ChangeState(death);
             }
         }
 

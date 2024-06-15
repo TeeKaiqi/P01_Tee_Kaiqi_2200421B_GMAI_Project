@@ -33,7 +33,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
                 }
                 else
                 {
-                    Debug.Log("unable to find collieder");
+                    //Debug.Log("unable to find enemy collider");
                 }
 
             }

@@ -15,7 +15,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Enemy dead");
+            //Debug.Log("Enemy dead");
             animator = enemy.anim;
             animator.SetBool(dead, true);
 

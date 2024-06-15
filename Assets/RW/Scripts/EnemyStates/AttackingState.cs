@@ -7,19 +7,55 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class AttackingState : EnemyState
     {
-        public NavMeshAgent navAgent;
-        public float attackRadius;
+        Animator animator;
+        private float attackRadius = 3f;
+        private float attackAnimationTime = 1.5f;
+        private bool attackAnimationDone;
+        private int attack = Animator.StringToHash("Attack");
+
         public AttackingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
         {
+        }
+
+        private IEnumerator AttackCoroutine()
+        {
+            yield return new WaitForSeconds(attackAnimationTime);
+
+            Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, attackRadius);
+            foreach (Collider collider in hitColliders)
+            {
+                Character character = collider.GetComponent<Character>();
+                if (character != null)
+                {
+                    character.TakeDamage();
+                }
+                else
+                {
+                    Debug.Log("no character collider found");
+                }
+            }
+            attackAnimationDone = true;
         }
         // Start is called before the first frame update
         public override void Enter()
         {
             base.Enter();
             Debug.Log("AttackState entered");
-            navAgent = enemy.navAgent;
+            animator = enemy.anim;
+            attackAnimationDone = false;
+            animator.SetTrigger(attack);
+            enemy.StartCoroutine(AttackCoroutine());
+
         }
 
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+            if (attackAnimationDone)
+            {
+                stateMachine.ChangeEnemyState(enemy.patrolState);
+            }
+        }
         public override void Exit() 
         {
             base.Exit();

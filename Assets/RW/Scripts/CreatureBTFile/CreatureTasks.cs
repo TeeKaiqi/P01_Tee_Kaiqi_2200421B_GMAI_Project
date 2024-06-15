@@ -96,7 +96,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void Heal()
         {
-            //Debug.Log("Healing");
+            Debug.Log("Healing");
             animator.SetTrigger(heal);
             character.playerHealth += 1;
             Task.current.Succeed();
