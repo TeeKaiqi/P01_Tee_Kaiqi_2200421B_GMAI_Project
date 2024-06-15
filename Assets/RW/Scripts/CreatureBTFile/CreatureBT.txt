@@ -11,6 +11,7 @@ tree("Heal")
 		DistanceBetweenPlayer
 		CheckHealth
 		Heal
+		Wait(5.0)
 
 tree("Victory")
 	sequence
@@ -24,7 +25,7 @@ tree("Taunt")
 		EnemyState
 		AlreadyTaunted
 		Taunt
-		Wait(2.0)
+		Wait(5.0)
 
 tree("Follow")
 	MoveToPlayer

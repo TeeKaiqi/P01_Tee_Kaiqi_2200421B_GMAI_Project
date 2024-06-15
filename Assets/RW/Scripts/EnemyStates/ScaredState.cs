@@ -7,6 +7,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class ScaredState : EnemyState
     {
         Animator animator;
+        CreatureTasks creatureTasks;
         public int scared => Animator.StringToHash("Scared");
         private int scaredAnimationTime = 2;
         private bool scaredAnimationPlayed;
@@ -25,13 +26,14 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             Debug.Log("Enemy scared");
             scaredAnimationPlayed = false;
             animator = enemy.anim;
+            creatureTasks = enemy.creatureTasks;
             animator.SetTrigger(scared);
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if ( scaredAnimationPlayed )
+            if (scaredAnimationPlayed)
             {
                 stateMachine.ChangeEnemyState(enemy.patrolState);
             }
@@ -39,6 +41,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Exit()
         {
             base.Exit();
+            creatureTasks.tauntActionDone = false;
         }
     }
 }

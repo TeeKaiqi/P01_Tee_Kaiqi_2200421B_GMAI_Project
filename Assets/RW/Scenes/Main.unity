@@ -1868,6 +1868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97480e12fdd0e154c89adcad5198bba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHealth: 2
   player: {fileID: 1252697822}
   creature: {fileID: 789215351}
   character: {fileID: 1252697824}
@@ -4023,7 +4024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 122379875}
   smoothTime: 4
-  offset: {x: 10, y: 0, z: 10}
+  offset: {x: 5, y: 0, z: 5}
 --- !u!82 &1161090119
 AudioSource:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@
  * THE SOFTWARE.
  */
 
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -266,6 +267,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             isWeaponOut = false;
 
             enemy = GameObject.FindGameObjectWithTag("Enemy");
+
+            Equip(MeleeWeapon);
+            SheathWeapon();
         }
 
         private void Update()

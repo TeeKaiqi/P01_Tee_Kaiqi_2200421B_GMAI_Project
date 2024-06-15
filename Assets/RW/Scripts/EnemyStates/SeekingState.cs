@@ -14,29 +14,23 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         NavMeshAgent navAgent;
         GameObject creature;
         CreatureTasks creatureTasks;
-
+        public float rangeToDetectPlayer = 10f; //range where the enemy will be able to detect the player
         public SeekingState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
         {
         }
-
-        bool SeekPlayer()
+        bool PlayerWithinDetectRange() //boolean that returns true when the character is within specified distance of the enemy
         {
-            navAgent.stoppingDistance = 1f;
-
-            if (navAgent.destination != enemy.player.transform.position)
+            float distance = Vector3.Distance(enemy.transform.position, enemy.player.transform.position); //calculate the distance ebtween the enemy and the player
+            if (distance < rangeToDetectPlayer)
             {
-                navAgent.SetDestination(enemy.player.transform.position);
-            }
-
-            if (!navAgent.pathPending && navAgent.remainingDistance <= navAgent.stoppingDistance)
-            {
-                return true;
+                return true; //return true if 5f is greater than the distance
             }
             else return false;
+            //Debug.Log("Checking if player is within range " + distance);
         }
         void MoveToCharacter()
         {
-            navAgent.stoppingDistance = 4f;
+            navAgent.stoppingDistance = 3f;
 
             if (navAgent.destination != enemy.player.transform.position)
             {
@@ -59,9 +53,9 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.LogicUpdate();
 
-            if (enemy.character.CurrentState is DuckingState) //if the character's currently in ducking state, the enemy cannot detect the player
+            if (!PlayerWithinDetectRange() || enemy.character.CurrentState is DuckingState) //if the character's currently in ducking state, the enemy cannot detect the player
             {
-                Debug.Log("The character is ducking and cannot be detected");
+                //Debug.Log("The character is ducking and cannot be detected");
                 stateMachine.ChangeEnemyState(enemy.patrolState); //switch back to patrol
             }
             else if (creatureTasks.tauntActionDone) //if the creature has taunted the enemy, it will switch to its scared state
