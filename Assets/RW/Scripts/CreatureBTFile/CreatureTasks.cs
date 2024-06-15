@@ -24,8 +24,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
         public int heal => Animator.StringToHash("Heal"); //access to the parameter in the animator
         public int taunt => Animator.StringToHash("Taunt");
+        public int victory => Animator.StringToHash("Victory");
 
         public bool tauntActionDone;
+        public bool celebratedAlready;
 
         // Start is called before the first frame update
         void Start()
@@ -41,7 +43,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             character = player.GetComponent<Character>();
             enemyScript = enemyCharacter.GetComponent<Enemy>();
 
-            tauntActionDone = false;
+            tauntActionDone = false; 
+            celebratedAlready = false;
         }
 
         private void Update()
@@ -97,6 +100,34 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             animator.SetTrigger(heal);
             character.playerHealth += 1;
             Task.current.Succeed();
+        }
+
+        [Task]
+        void CheckIfDead()
+        {
+            if (enemyScript.movementSM.CurrentEnemyState is DeadState)
+            {
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }
+
+        [Task]
+        void Celebrate()
+        {
+            if (!celebratedAlready)
+            {
+                celebratedAlready = true;
+                animator.SetTrigger(victory);
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
         }
 
         [Task]
