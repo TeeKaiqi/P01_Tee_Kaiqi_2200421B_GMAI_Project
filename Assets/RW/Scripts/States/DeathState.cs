@@ -14,7 +14,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public override void Enter()
         {
             base.Enter();
-            character.SetAnimationBool(death, true);
+            character.SetAnimationBool(death, true); //set the death aimation to true
         }
 
         public override void Exit() 

@@ -132,16 +132,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         [Task]
         void Celebrate()
         {
-            if (!celebratedAlready)
-            {
-                celebratedAlready = true;
-                animator.SetTrigger(victory);
-                Task.current.Succeed();
-            }
-            else
-            {
-                Task.current.Fail();
-            }
+            animator.SetTrigger(victory);
+            Task.current.Succeed();
         }
 
         [Task]

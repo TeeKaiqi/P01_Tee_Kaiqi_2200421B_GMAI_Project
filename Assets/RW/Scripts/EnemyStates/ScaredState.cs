@@ -28,6 +28,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             animator = enemy.anim;
             creatureTasks = enemy.creatureTasks;
             animator.SetTrigger(scared);
+            enemy.StartCoroutine(ScaredCoroutine());
         }
 
         public override void LogicUpdate()

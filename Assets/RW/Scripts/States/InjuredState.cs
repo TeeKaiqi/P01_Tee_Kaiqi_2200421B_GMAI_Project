@@ -7,7 +7,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     public class InjuredState : GroundedState
     {
         private bool injuredAnimationDone; //boolean that keeps track of the swing animation
-        private float injuredAnimationTime = .5f;
+        private float injuredAnimationTime = 1f;
         public int injuredParam => Animator.StringToHash("Injured");  //access the animator by storing the name of the parameter as swingMelee
         public InjuredState(Character character, StateMachine stateMachine) : base(character, stateMachine)
         {
