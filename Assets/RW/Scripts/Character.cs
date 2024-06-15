@@ -49,7 +49,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public SheathWeaponState sheathWeapon;
         public SwingWeaponState swingWeapon;
         public Text displayHealth;
-
+        public GameObject enemy;
+         
         public State CurrentState => movementSM.CurrentState; //include a public property that shows the current state of the character
 
         #region Variables
@@ -256,6 +257,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             movementSM.Initialize(standing);
 
             isWeaponOut = false;
+
+            enemy = GameObject.FindGameObjectWithTag("Enemy");
         }
 
         private void Update()

@@ -5,19 +5,21 @@ using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 namespace RayWenderlich.Unity.StatePatternInUnity
 {
     public class Enemy : MonoBehaviour
     {
         private float speed = 1f;
-        public int enemyHealth = 2;
+        private int enemyHealth = 2;
 
         public GameObject player;
         public GameObject creature;
         public Character character;
         public CreatureTasks creatureTasks;
         public NavMeshAgent navAgent;
+        public Text displayEnemyHealth;
         
         private int horizonalMoveParam = Animator.StringToHash("H_Speed");
         private int verticalMoveParam = Animator.StringToHash("V_Speed");
@@ -46,10 +48,16 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             seekingState = new SeekingState(this, movementSM);
             scaredState = new ScaredState(this, movementSM);
             attackingState = new AttackingState(this, movementSM);
+            deadState = new DeadState(this, movementSM);
 
             movementSM.IntialiseEnemy(patrolState);
         }
 
+        public void TakeDamage()
+        {
+            enemyHealth -= 1;
+
+        }
         public void UpdateAnimationParameters() //method that accesses the animator parameters so that it can update the movement and make the blend tree work
         {
             Vector3 velocity = navAgent.velocity; //set the velocity as the velocity from the navagent
@@ -68,6 +76,12 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             UpdateAnimationParameters();
             movementSM.CurrentEnemyState.HandleInput();
             movementSM.CurrentEnemyState.LogicUpdate();
+            displayEnemyHealth.text = "Enemy health: " + enemyHealth.ToString();
+            if (enemyHealth <= 0)
+            {
+                Debug.Log("Enemy died");
+                movementSM.ChangeEnemyState(deadState);
+            }
         }
     }
 }
