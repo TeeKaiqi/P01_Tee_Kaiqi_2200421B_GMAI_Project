@@ -53,7 +53,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             else return false;
             //Debug.Log("Checking if player is within range " + distance);
         }
-
+ 
         public override void Enter()
         {
             base.Enter();
@@ -69,7 +69,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.LogicUpdate();
             navAgent.stoppingDistance = 2f;
 
-            if (PlayerWithinDetectRange() && enemy.character.CurrentState is not DuckingState) //if the bool is true
+            if (PlayerWithinDetectRange() && !(enemy.character.CurrentState is DuckingState) && !(enemy.character.CurrentState is DeathState)) //if the bool is true
             {
                 stateMachine.ChangeEnemyState(enemy.seekingState); //change state
             }

@@ -9,7 +9,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
     {
         Animator animator;
         private float attackRadius = 3f;
-        private float attackAnimationTime = 1.5f;
+        private float attackAnimationTime = 1.75f;
         private bool attackAnimationDone;
         private int attack = Animator.StringToHash("Attack");
 
@@ -52,6 +52,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             base.LogicUpdate();
             if (attackAnimationDone)
+            {
+                stateMachine.ChangeEnemyState(enemy.patrolState);
+            }
+            if (enemy.character.playerHealth <= 0)
             {
                 stateMachine.ChangeEnemyState(enemy.patrolState);
             }
