@@ -42,7 +42,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public StandingState standing;
         public DuckingState ducking;
         public JumpingState jumping;
-        public SlidingState sliding; //added states
+        public InjuredState injured; //added states
         public DeathState death;
         public BlockingState block;
         public DrawWeaponState drawWeapon;
@@ -233,6 +233,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public void TakeDamage()
         {
             playerHealth -= 1;
+            movementSM.ChangeState(injured);
         }
 
         #endregion
@@ -248,7 +249,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
             jumping = new JumpingState(this, movementSM);
 
-            sliding = new SlidingState(this, movementSM);
+            injured = new InjuredState(this, movementSM);
 
             death = new DeathState(this, movementSM);
 
