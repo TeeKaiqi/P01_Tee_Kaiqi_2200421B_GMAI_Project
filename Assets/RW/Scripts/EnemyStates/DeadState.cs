@@ -17,7 +17,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.Enter();
             //Debug.Log("Enemy dead");
             animator = enemy.anim;
-            animator.SetBool(dead, true);
+            animator.SetBool(dead, true); //set the dead animation bool to true
 
         }
 

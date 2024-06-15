@@ -49,7 +49,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
 
         private void Update()
         {
-            UpdateAnimationParameters();
+            UpdateAnimationParameters(); //call the function that updates the animations 
         }
 
         public void UpdateAnimationParameters() //method that accesses the animator parameters so that it can update the movement and make the blend tree work
@@ -69,7 +69,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         {
             //Debug.Log("Checking distance between player");
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < creature.healingDistance)
+            if (distance < creature.healingDistance) //calculates distance between player and creature to see if the player is within healing distance
             {
                 Task.current.Succeed();
             }
@@ -83,7 +83,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         void CheckHealth()
         {
             //Debug.Log("Character's health is " + character.playerHealth);
-            if (character.playerHealth < 3 && character.playerHealth > 0)
+            if (character.playerHealth < 3 && character.playerHealth > 0) //check if player needs healing
             {
                 Task.current.Succeed();
             }
@@ -97,15 +97,15 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         void Heal()
         {
             Debug.Log("Healing");
-            animator.SetTrigger(heal);
-            character.playerHealth += 1;
+            animator.SetTrigger(heal); //trigger heal animation
+            character.playerHealth += 1; //add one to the players health
             Task.current.Succeed();
         }
 
         [Task]
         void CheckIfDead()
         {
-            if (enemyScript.movementSM.CurrentEnemyState is DeadState)
+            if (enemyScript.movementSM.CurrentEnemyState is DeadState) //check the enemy's current state
             {
                 Task.current.Succeed();
             }
@@ -116,7 +116,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
-        void YetToCelebrate()
+        void YetToCelebrate() //check if the creature has celebrated already
         {
             if (!celebratedAlready)
             {
@@ -130,14 +130,14 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
-        void Celebrate()
+        void Celebrate() //trigger the celebration animation
         {
             animator.SetTrigger(victory);
             Task.current.Succeed();
         }
 
         [Task]
-        void EnemyIsClose()
+        void EnemyIsClose() //checks if the enemy is close enough to be taunted
         {
             float distance = Vector3.Distance(transform.position, enemyCharacter.transform.position);
             if (distance < creature.tauntingDistance)
@@ -157,7 +157,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
-        void EnemyState()
+        void EnemyState() //only if the enemy is either patrolling or seeking will this task succeed
         {
             if (enemyScript.movementSM.CurrentEnemyState is PatrollingState || enemyScript.movementSM.CurrentEnemyState is SeekingState)
             {
@@ -169,7 +169,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             }
         }
         [Task]
-        void Taunt()
+        void Taunt() //trigger the taunt animation
         {
             Debug.Log("Taunting");
             tauntActionDone = true; //set the actiondone to true so that the enemy can know to change to scaredstate
@@ -178,7 +178,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         }
 
         [Task]
-        void MoveToPlayer()
+        void MoveToPlayer() //constantly follow the player 
         {
             navAgent.stoppingDistance = 3f;
 

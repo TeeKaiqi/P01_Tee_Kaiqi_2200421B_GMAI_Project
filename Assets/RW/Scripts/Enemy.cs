@@ -74,7 +74,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         void Update()
         {
             UpdateAnimationParameters();
-            movementSM.CurrentEnemyState.HandleInput();
             movementSM.CurrentEnemyState.LogicUpdate();
             displayEnemyHealth.text = "Enemy health: " + enemyHealth.ToString();
             if (enemyHealth <= 0)

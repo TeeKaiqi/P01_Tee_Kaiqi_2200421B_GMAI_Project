@@ -27,8 +27,8 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             scaredAnimationPlayed = false;
             animator = enemy.anim;
             creatureTasks = enemy.creatureTasks;
-            animator.SetTrigger(scared);
-            enemy.StartCoroutine(ScaredCoroutine());
+            animator.SetTrigger(scared); //trigger scared animation
+            enemy.StartCoroutine(ScaredCoroutine()); //start the coroutine
         }
 
         public override void LogicUpdate()
@@ -36,13 +36,13 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             base.LogicUpdate();
             if (scaredAnimationPlayed)
             {
-                stateMachine.ChangeEnemyState(enemy.patrolState);
+                stateMachine.ChangeEnemyState(enemy.patrolState); //change state to patrol once the scared animation is done
             }
         }
         public override void Exit()
         {
             base.Exit();
-            creatureTasks.tauntActionDone = false;
+            creatureTasks.tauntActionDone = false; //set the creatureTasks tauntaction to false so the enemy isnt constantly entering its scaredstate
         }
     }
 }
