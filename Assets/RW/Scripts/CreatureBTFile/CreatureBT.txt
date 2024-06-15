@@ -25,7 +25,7 @@ tree("Taunt")
 		EnemyState
 		AlreadyTaunted
 		Taunt
-		Wait(5.0)
+		Wait(2.0)
 
 tree("Follow")
 	MoveToPlayer

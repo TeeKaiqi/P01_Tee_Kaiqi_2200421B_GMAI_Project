@@ -9,7 +9,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         Animator animator;
         CreatureTasks creatureTasks;
         public int scared => Animator.StringToHash("Scared");
-        private int scaredAnimationTime = 2;
+        private int scaredAnimationTime = 4;
         private bool scaredAnimationPlayed;
         public ScaredState(Enemy enemy, StateMachine stateMachine) : base(enemy, stateMachine)
         {
