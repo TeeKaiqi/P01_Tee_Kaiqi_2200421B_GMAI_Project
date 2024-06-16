@@ -56,7 +56,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
         public void TakeDamage()
         {
             enemyHealth -= 1;
-
         }
         public void UpdateAnimationParameters() //method that accesses the animator parameters so that it can update the movement and make the blend tree work
         {

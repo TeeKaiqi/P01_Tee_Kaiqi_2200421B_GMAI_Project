@@ -23,7 +23,7 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             float distance = Vector3.Distance(enemy.transform.position, enemy.player.transform.position); //calculate the distance ebtween the enemy and the player
             if (distance < rangeToDetectPlayer)
             {
-                return true; //return true if 5f is greater than the distance
+                return true; 
             }
             else return false;
             //Debug.Log("Checking if player is within range " + distance);
