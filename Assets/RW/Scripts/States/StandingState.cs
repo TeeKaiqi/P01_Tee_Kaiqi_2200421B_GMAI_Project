@@ -99,10 +99,10 @@ namespace RayWenderlich.Unity.StatePatternInUnity
             {
                 stateMachine.ChangeState(character.block);
             }
-            else if (dead)
-            {
-                stateMachine.ChangeState(character.death);
-            }
+            //else if (dead)
+            //{
+            //    stateMachine.ChangeState(character.death);
+            //}
         }
 
     }

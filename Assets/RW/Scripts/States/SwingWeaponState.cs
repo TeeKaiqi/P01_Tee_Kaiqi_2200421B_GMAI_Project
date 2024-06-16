@@ -35,7 +35,6 @@ namespace RayWenderlich.Unity.StatePatternInUnity
                 {
                     //Debug.Log("unable to find enemy collider");
                 }
-
             }
             swingAnimationDone = true;
         }
